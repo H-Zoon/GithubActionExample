@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-		#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
+    #step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
     # 각 단계 앞에 반드시 - 명시
     #워크플로우가 레포지토리에 접근할 수 있게 checkout
     steps:
@@ -22,7 +22,7 @@ jobs:
           # 이전 commit 기록들까지 모두 가져오기 위해서 fetch-depth를 0으로 설정.
           fetch-depth: 0
 
-			#안드로이드 프로젝트 빌드를 위한 기본 셋팅
+      #안드로이드 프로젝트 빌드를 위한 기본 셋팅
       # JDK 17을 설정.
       - name: Setup JDK 17
         uses: actions/setup-java@v3
@@ -50,7 +50,7 @@ jobs:
         run: chmod +x gradlew
 
       # 비밀 정보를 저장한 secrets.tar.gpg 파일을 복호화.
-			# 테스트 환경에서는 해당 파일 없음으로 주석
+      # 테스트 환경에서는 해당 파일 없음으로 주석
       #- name: Decrypt secrets.tar.gpg
       #  run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
       #  env:
@@ -61,7 +61,8 @@ jobs:
       #- name: Unzip secrets.tar
       #  run: tar xvf secrets.tar
 
-			# ktlint, detekt 사용하기 위해서는 프로젝트 단위 gradle 에서 해당 라이브러리 import 필요
+
+      # ktlint, detekt 사용하기 위해서는 프로젝트 단위 gradle 에서 해당 라이브러리 import 필요
     
       # ktlint 실행.
       - name: Run ktlint
