@@ -20,11 +20,11 @@ jobs:
           fetch-depth: 0
     
     #안드로이드 프로젝트 빌드를 위한 기본 셋팅
-      - name: Setup JDK 11
+      - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: "zulu"
-          java-version: 11
+          java-version: 17
       
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
