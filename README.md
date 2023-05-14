@@ -137,8 +137,8 @@ GitHub에서 제공하는 대표적인 공개 액션으로 바로 위 예제에�
 2. job: 을 통해 하나의 작업이 정의(build, deploy). 이 작업은 "ubuntu-latest"에서 실행.
 3. "actions/checkout@v3" 액션을 사용하여 코드를 체크아웃. "fetch-depth" 매개변수가 0으로 설정되어 있으므로 이전 히스토리를 가져오지 않음.
 4. "Setup JDK 13" 단계에서는 "actions/setup-java@v3" 액션을 사용하여 Zulu를 기반으로 JDK 17을 설치.
-5. "Setup Android SDK" 단계에서는 "android-actions/setup-android@v2" 액션을 사용하여 Android SDK를 설정합니다.
-6. "Cache Gradle packages" 단계에서는 "actions/cache@v3" 액션을 사용하여 Gradle 패키지를 캐시. 이는 이전 빌드에서 Gradle 의존성을 다시 다운로드하지 않도록 하여 빌드 시간을 단축
+5. "Setup Android SDK" 단계에서는 "android-actions/setup-android@v2" 액션을 사용하여 Android SDK를 설정.
+6. "Cache Gradle packages" 단계에서는 "actions/cache@v3" 액션을 사용하여 Gradle 패키지를 캐시.
 7. "Grant execute permission for gradlew" 단계에서는 "chmod" 명령을 사용하여 "gradlew" 스크립트에 실행 권한을 부여.
 8. "Decrypt secrets.tar.gpg" 단계에서는 "gpg" 명령을 사용하여 "secrets.tar.gpg" 파일을 복호화. 이 명령은 "SECRET_GPG_PASSWORD" 환경 변수에서 비밀번호를 가져오며, 이 변수는 GitHub Secrets를 통해 제공.
 9. "Unzip secrets.tar" 단계에서는 "tar" 명령을 사용하여 "secrets.tar" 파일을 압축 해제.
