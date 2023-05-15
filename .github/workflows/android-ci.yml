@@ -77,6 +77,7 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       # 안드로이드 테스트 보고서를 생성.
+      # https://github.com/asadmansr/android-test-report-action
       - name: Create android test report
         uses: asadmansr/android-test-report-action@v1.2.0
         if: ${{ always() }} # 항상 실행.
