@@ -49,7 +49,7 @@ jobs:
         run: chmod +x gradlew
 
       # 비밀 정보를 저장한 secrets.tar.gpg 파일을 복호화.
-			# 테스트 환경에서는 해당 파일 없음으로 주석
+      # 테스트 환경에서는 해당 파일 없음으로 주석
       #- name: Decrypt secrets.tar.gpg
       #  run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
       #  env:
