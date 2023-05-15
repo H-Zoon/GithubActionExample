@@ -3,7 +3,7 @@ GithubAction을 공부하고 예제를 적용해보기 위한 repository
 
 # GithubAction
 
-github에서 제공하는 CI(Continuous Integration, 지속 통학) 와 CD(Continuous Deploymeny, 지속 배포) 를 위해 제공하는 서비스. 다른 CI/CD 서비스에 비해 진입장벽이 낮음.
+github에서 제공하는 CI(Continuous Integration, 지속 통합) 와 CD(Continuous Deploymeny, 지속 배포) 를 위해 제공하는 서비스. 다른 CI/CD 서비스에 비해 진입장벽이 낮음.
 
 자동으로 코드 저장소에서 어떤 이벤트(event)가 발생했을 때 특정 작업이 일어나게 하거나 주기적으로 어떤 작업들을 반복해서 실행 가능. 
 
@@ -113,7 +113,7 @@ jobs:
       - run: npm test
 ```
 
-워크플로우 파일 내에서 작업 단계를 명시해줄 때는 YAML 문법에서 시퀀스(sequence) 타입을 사용하기 때문에 각 단계 앞에 반드시 `-`를 붙여줘야 합니다.
+워크플로우 파일 내에서 작업 단계를 명시해줄 때는 YAML 문법에서 시퀀스(sequence) 타입을 사용하기 때문에 각 단계 앞에 반드시 `-`를 추가
 
 ## Actions
 
@@ -134,7 +134,7 @@ GitHub에서 제공하는 대표적인 공개 액션으로 바로 위 예제에�
 각 YAML의 공통 과정.
 
 1.  pull_request:
-    branches: [ develop ]  로 정의된 브랜치로 pull_request가 발생하면, 다음 작업이 실행.
+    branches: [ ##### ]  로 정의된 브랜치로 pull_request가 발생하면, 다음 작업이 실행.
 2. job: 을 통해 하나의 작업이 정의(build, deploy). 이 작업은 "ubuntu-latest"에서 실행.
 3. "actions/checkout@v3" 액션을 사용하여 코드를 체크아웃. "fetch-depth" 매개변수가 0으로 설정되어 있으므로 이전 히스토리를 가져오지 않음.
 4. "Setup JDK 13" 단계에서는 "actions/setup-java@v3" 액션을 사용하여 Zulu를 기반으로 JDK 17을 설치.
