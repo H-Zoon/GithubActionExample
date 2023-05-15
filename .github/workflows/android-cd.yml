@@ -60,16 +60,18 @@ jobs:
       #- name: Unzip secrets.tar
       #  run: tar xvf secrets.tar
 
-      # 릴리스 유니버설 APK 빌드
-      - name: Build release universal apk
-        run: ./gradlew presentation:packageReleaseUniversalApk
+      # 릴리스 APK.
+      - name: Build assemble release apk
+        run: ./gradlew assembleRelease
 
       # Firebase App Distribution에 APK 업로드
-      - name: Upload apk to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }} # Firebase App ID
-          token: ${{ secrets.FIREBASE_TOKEN }} # Firebase 토큰
-          groups: runnerbe # 배포 대상 그룹
-          file: presentation/build/outputs/universal_apk/release/presentation-release-universal.apk # 업로드 할 APK 파일 경로
-          releaseNotesFile: documents/release-note/default-note.txt # 릴리스 노트 파일 경로
+      # https://github.com/wzieba/Firebase-Distribution-Github-Action:
+
+      #- name: Upload apk to Firebase App Distribution
+      #  uses: wzieba/Firebase-Distribution-Github-Action@v1
+      #  with:
+      #    appId: ${{ secrets.FIREBASE_APP_ID }} # Firebase App ID
+      #    serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+      #    groups: runnerbe # 배포 대상 그룹
+      #    file: app/build/outputs/apk/release/release.apk # 업로드 할 APK 파일 경로
+      #    releaseNotesFile: documents/release-note/default-note.txt # 릴리스 노트 파일 경로

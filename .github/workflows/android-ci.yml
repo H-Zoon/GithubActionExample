@@ -81,6 +81,6 @@ jobs:
         uses: asadmansr/android-test-report-action@v1.2.0
         if: ${{ always() }} # 항상 실행.
 
-      # 릴리스 APK.
-      - name: Build assemble release apk
-        run: ./gradlew assembleRelease
+      # 디버그 APK.
+      - name: Build assemble debug apk
+        run: ./gradlew assembleDebug
