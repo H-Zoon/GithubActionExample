@@ -148,7 +148,7 @@ GitHub에서 제공하는 대표적인 공개 액션으로 바로 위 예제에�
 
 ```yaml
 # 워크플로우의 이름 지정.
-name: Android CI 
+name: Android CI
 
 # develop 브랜치에 대해서만 pull request 가 발생했을 때 실행하도록 설정.
 on:
@@ -161,7 +161,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-	#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
+    #step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
     # 각 단계 앞에 반드시 - 명시
     #워크플로우가 레포지토리에 접근할 수 있게 checkout
     steps:
@@ -171,18 +171,18 @@ jobs:
           # 이전 commit 기록들까지 모두 가져오기 위해서 fetch-depth를 0으로 설정.
           fetch-depth: 0
 
-	  #안드로이드 프로젝트 빌드를 위한 기본 셋팅
+      #안드로이드 프로젝트 빌드를 위한 기본 셋팅
       # JDK 17을 설정.
       - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: "zulu"
           java-version: 17
-      
+
       # 안드로이드 SDK 설정.
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
-  
+
       # Gradle 패키지 캐시.
       - name: Cache Gradle packages
         uses: actions/cache@v3
@@ -193,13 +193,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/buildSrc/**/*.kt') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      
+
       # gradlew 파일에 실행 권한 부여.
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       # 비밀 정보를 저장한 secrets.tar.gpg 파일을 복호화.
-	  # 테스트 환경에서는 해당 파일 없음으로 주석
+      # 테스트 환경에서는 해당 파일 없음으로 주석
       #- name: Decrypt secrets.tar.gpg
       #  run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
       #  env:
@@ -210,29 +210,30 @@ jobs:
       #- name: Unzip secrets.tar
       #  run: tar xvf secrets.tar
 
-			# ktlint, detekt 사용하기 위해서는 프로젝트 단위 gradle 에서 해당 라이브러리 import 필요
-    
+
+      # ktlint, detekt 사용하기 위해서는 프로젝트 단위 gradle 에서 해당 라이브러리 import 필요
+
       # ktlint 실행.
       - name: Run ktlint
         run: ./gradlew ktlintCheck
-    
+
       # detekt 실행.
       - name: Run detekt
         run: ./gradlew detekt
-    
+
       # 유닛 테스트 실행.
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest
 
       # 안드로이드 테스트 보고서를 생성.
-			# https://github.com/asadmansr/android-test-report-action
+      # https://github.com/asadmansr/android-test-report-action
       - name: Create android test report
         uses: asadmansr/android-test-report-action@v1.2.0
         if: ${{ always() }} # 항상 실행.
 
-      # 릴리스 APK.
-      - name: Build assemble release apk
-        run: ./gradlew assembleRelease
+      # 디버그 APK.
+      - name: Build assemble debug apk
+        run: ./gradlew assembleDebug
 ```
 
 1. 문법 검사를 위한 ktlint, detekt 를 실행.
@@ -244,19 +245,19 @@ jobs:
 
 ```yaml
 # 워크플로우의 이름
-name: Android CD 
+name: Android CD
 
 # pull_request 이벤트가 발생하고, deploy-dev 브랜치에서 생성된 경우 워크플로우가 실행됨
 on:
   pull_request:
-    branches: [ deploy-dev ] 
+    branches: [ deploy-dev ]
 
 jobs:
   deploy:
     # 작업을 실행할 운영체제
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
-	#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
+    #step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
     # 각 단계 앞에 반드시 - 명시
     #워크플로우가 레포지토리에 접근할 수 있게 checkout
     steps:
@@ -266,18 +267,18 @@ jobs:
           # 이전 commit 기록들까지 모두 가져오기 위해서 fetch-depth를 0으로 설정.
           fetch-depth: 0
 
-	  #안드로이드 프로젝트 빌드를 위한 기본 셋팅
+      #안드로이드 프로젝트 빌드를 위한 기본 셋팅
       # JDK 17을 설정.
       - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: "zulu"
           java-version: 17
-      
+
       # 안드로이드 SDK 설정.
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
-  
+
       # Gradle 패키지 캐시.
       - name: Cache Gradle packages
         uses: actions/cache@v3
@@ -288,13 +289,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/buildSrc/**/*.kt') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      
+
       # gradlew 파일에 실행 권한 부여.
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       # 비밀 정보를 저장한 secrets.tar.gpg 파일을 복호화.
-	  # 테스트 환경에서는 해당 파일 없음으로 주석
+      # 테스트 환경에서는 해당 파일 없음으로 주석
       #- name: Decrypt secrets.tar.gpg
       #  run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
       #  env:
@@ -305,19 +306,21 @@ jobs:
       #- name: Unzip secrets.tar
       #  run: tar xvf secrets.tar
 
-      # 릴리스 유니버설 APK 빌드
-      - name: Build release universal apk
-        run: ./gradlew presentation:packageReleaseUniversalApk
+      # 릴리스 APK.
+      - name: Build assemble release apk
+        run: ./gradlew assembleRelease
 
       # Firebase App Distribution에 APK 업로드
-      - name: Upload apk to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }} # Firebase App ID
-          token: ${{ secrets.FIREBASE_TOKEN }} # Firebase 토큰
-          groups: runnerbe # 배포 대상 그룹
-          file: presentation/build/outputs/universal_apk/release/presentation-release-universal.apk # 업로드 할 APK 파일 경로
-          releaseNotesFile: documents/release-note/default-note.txt # 릴리스 노트 파일 경로
+      # https://github.com/wzieba/Firebase-Distribution-Github-Action:
+
+      #- name: Upload apk to Firebase App Distribution
+      #  uses: wzieba/Firebase-Distribution-Github-Action@v1
+      #  with:
+      #    appId: ${{ secrets.FIREBASE_APP_ID }} # Firebase App ID
+      #    serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+      #    groups: runnerbe # 배포 대상 그룹
+      #    file: app/build/outputs/apk/release/release.apk # 업로드 할 APK 파일 경로
+      #    releaseNotesFile: documents/release-note/default-note.txt # 릴리스 노트 파일 경로
 ```
 
 1. "Build release universal apk" 단계에서는 "gradlew" 스크립트를 사용하여 "presentation:packageReleaseUniversalApk" 작업을 실행하여 APK 파일을 빌드.
