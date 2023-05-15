@@ -75,11 +75,7 @@ jobs:
       # 유닛 테스트 실행.
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest
-    
-      # 릴리스 APK 빌드.
-      - name: Build assemble release apk
-        run: ./gradlew assembleRelease
- 
+
       # 안드로이드 테스트 보고서를 생성.
       - name: Create android test report
         uses: asadmansr/android-test-report-action@v1.2.0
