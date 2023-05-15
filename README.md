@@ -25,9 +25,9 @@ ex) 코드 저장소의 `main` 브랜치에 `push` 이벤트가 발생할 �
 
 ```yaml
 on:  
-	push:    
-		branches:      
-			- main
+  push:    
+    branches:      
+      - main
 
 jobs:
   # ...(생략)...
@@ -39,8 +39,8 @@ jobs:
 
 ```yaml
 on:  
-	schedule:  
-	- cron: "0 0 * * *"
+  schedule:  
+  - cron: "0 0 * * *"
 
 jobs:
   # ...(생략)...
@@ -66,9 +66,9 @@ GitHub Actions에서 작업(Job)이란 독립된 가상 머신(machine) 또는 �
 # ...(생략)...
 
 jobs:  
-	job1:    # job1에 대한 세부 내용  
-	job2:    # job2에 대한 세부 내용  
-	job3:    # job3에 대한 세부 내용
+  job1:    # job1에 대한 세부 내용  
+  job2:    # job2에 대한 세부 내용  
+  job3:    # job3에 대한 세부 내용
 ```
 
 작업의 세부 내용으로는 여러 가지 내용을 명시 가능. 
@@ -84,7 +84,8 @@ jobs:
 
 jobs:
   job1:
-    runs-on: ubuntu-latest    steps:
+    runs-on: ubuntu-latest    
+    steps:
       # ...(생략)...
 ```
 
@@ -107,9 +108,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:      
-			- uses: actions/checkout@v3      
-			- run: npm install      
-			- run: npm test
+      - uses: actions/checkout@v3      
+      - run: npm install      
+      - run: npm test
 ```
 
 워크플로우 파일 내에서 작업 단계를 명시해줄 때는 YAML 문법에서 시퀀스(sequence) 타입을 사용하기 때문에 각 단계 앞에 반드시 `-`를 붙여줘야 합니다.
@@ -160,7 +161,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-		#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
+	#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
     # 각 단계 앞에 반드시 - 명시
     #워크플로우가 레포지토리에 접근할 수 있게 checkout
     steps:
@@ -170,7 +171,7 @@ jobs:
           # 이전 commit 기록들까지 모두 가져오기 위해서 fetch-depth를 0으로 설정.
           fetch-depth: 0
 
-			#안드로이드 프로젝트 빌드를 위한 기본 셋팅
+	  #안드로이드 프로젝트 빌드를 위한 기본 셋팅
       # JDK 17을 설정.
       - name: Setup JDK 17
         uses: actions/setup-java@v3
@@ -198,7 +199,7 @@ jobs:
         run: chmod +x gradlew
 
       # 비밀 정보를 저장한 secrets.tar.gpg 파일을 복호화.
-			# 테스트 환경에서는 해당 파일 없음으로 주석
+	  # 테스트 환경에서는 해당 파일 없음으로 주석
       #- name: Decrypt secrets.tar.gpg
       #  run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
       #  env:
@@ -255,7 +256,7 @@ jobs:
     # 작업을 실행할 운영체제
     runs-on: ubuntu-latest 
 
-		#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
+	#step 속성을 통해 작업 순서 정의. 각 작업(job)은 하나 이상의 단계 (step)으로 정의
     # 각 단계 앞에 반드시 - 명시
     #워크플로우가 레포지토리에 접근할 수 있게 checkout
     steps:
@@ -265,7 +266,7 @@ jobs:
           # 이전 commit 기록들까지 모두 가져오기 위해서 fetch-depth를 0으로 설정.
           fetch-depth: 0
 
-			#안드로이드 프로젝트 빌드를 위한 기본 셋팅
+	  #안드로이드 프로젝트 빌드를 위한 기본 셋팅
       # JDK 17을 설정.
       - name: Setup JDK 17
         uses: actions/setup-java@v3
@@ -293,7 +294,7 @@ jobs:
         run: chmod +x gradlew
 
       # 비밀 정보를 저장한 secrets.tar.gpg 파일을 복호화.
-			# 테스트 환경에서는 해당 파일 없음으로 주석
+	  # 테스트 환경에서는 해당 파일 없음으로 주석
       #- name: Decrypt secrets.tar.gpg
       #  run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
       #  env:
