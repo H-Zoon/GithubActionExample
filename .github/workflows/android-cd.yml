@@ -1,5 +1,5 @@
   # 워크플로우의 이름 지정.
-  name: Android CD
+  name: Android CI
 
   # develop 브랜치에 대해서만 pull request 가 발생했을 때 실행하도록 설정.
   on:
